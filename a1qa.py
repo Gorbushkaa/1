@@ -1,25 +1,27 @@
-def number1():
-    print("Введите 1-е число")
+def file_name():
+    print("Введи имя файла")
+    try:
+        name = str(input())
+        with open(name, "r") as file:
+            file.readline()
+        return name
+    except IOError:
+        print("Файл не найден")
+        file_name()
+
+
+def number(counter):
+    print("Введите {}-e число".format(counter))
     try:
         inp = int(input())
         return inp
     except ValueError:
         print("Это не число!")
-        number1()
+        number(counter)
 
 
-def number2():
-    print("Введите 2-е число")
-    try:
-        inp = int(input())
-        return inp
-    except ValueError:
-        print("Это не число!")
-        number2()
-
-
-def readf(num1, num2):
-    with open("1.txt", "r") as file:
+def read_f(num1, num2, name):
+    with open(name, "r") as file:
         lines = file.readlines()
         print_line = lines[num1-1:num2]
         del lines[num1-1:num2]
@@ -27,18 +29,19 @@ def readf(num1, num2):
         return lines
 
 
-def writef(lines):
-    with open("1.txt", "w") as file:
+def write_f(lines, name):
+    with open(name, "w") as file:
         for line in lines:
             file.write(line)
 
 
 def main():
-    num1 = number1()
-    num2 = number2()
+    name = file_name()
+    num1 = number(1)
+    num2 = number(2)
     if num1 > num2:
         num1, num2 = num2, num1
-    writef(readf(num1, num2))
+    write_f(read_f(num1, num2, name), str(name))
 
 
 if __name__ == '__main__':
