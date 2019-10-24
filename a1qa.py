@@ -21,8 +21,8 @@ def number2():
 def readf(num1, num2):
     with open("1.txt", "r") as file:
         lines = file.readlines()
-        print_line = lines[num1-1:num2-1]
-        del lines[num1-1:num2-1]
+        print_line = lines[num1-1:num2]
+        del lines[num1-1:num2]
         print(''.join(print_line))
         return lines
 
